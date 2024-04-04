@@ -3,7 +3,9 @@ import axios from "axios";
 let watchlists = [];
 
 export const getWatchlistFromDb = async () => {
-  const data = await axios.get(`http://localhost:4000/watchlist`);
+  const data = await axios.get(
+    `https://mini-project-six-umber.vercel.app/watchlist`
+  );
   watchlists = data.data;
   return data.data;
 };
@@ -22,14 +24,20 @@ export const addMovieToWatchlist = async (movie) => {
     watchlists = watchlists.filter((e) => {
       e.id != movie.id;
     });
-    let data = await axios.delete(`http://localhost:4000/watchlist`, {
-      data: movie,
-    });
+    let data = await axios.delete(
+      `https://mini-project-six-umber.vercel.app/watchlist`,
+      {
+        data: movie,
+      }
+    );
     console.log(data);
     return data ? true : false;
   }
 
-  const data = await axios.post(`http://localhost:4000/watchlist`, movie);
+  const data = await axios.post(
+    `https://mini-project-six-umber.vercel.app/watchlist`,
+    movie
+  );
   watchlists.push(movie);
   console.log(data);
   return data ? true : false;
